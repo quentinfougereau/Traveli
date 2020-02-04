@@ -4,22 +4,29 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.example.traveli.Adapter.MyAdapter;
+import com.example.traveli.Helper.MyButtonClickListener;
+import com.example.traveli.Helper.MySwipeHelper;
+import com.example.traveli.Model.Travel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    RecyclerViewAdapter mAdapter;
-    ArrayList<String> stringArrayList = new ArrayList<>();
-    CoordinatorLayout coordinatorLayout;
+    MyAdapter adapter;
+    LinearLayoutManager linearLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,62 +34,70 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recyclerView);
-        coordinatorLayout = findViewById(R.id.coordinatorLayout);
+        recyclerView.setHasFixedSize(true);
+        linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
-        populateRecyclerView();
-        enableSwipeToDeleteAndUndo();
-
-    }
-
-    private void populateRecyclerView() {
-        stringArrayList.add("Voyage 1");
-        stringArrayList.add("Voyage 2");
-        stringArrayList.add("Voyage 3");
-        stringArrayList.add("Voyage 4");
-        stringArrayList.add("Voyage 5");
-        stringArrayList.add("Voyage 6");
-        stringArrayList.add("Voyage 7");
-        stringArrayList.add("Voyage 8");
-        stringArrayList.add("Voyage 9");
-        stringArrayList.add("Voyage 10");
-
-        mAdapter = new RecyclerViewAdapter(stringArrayList);
-        recyclerView.setAdapter(mAdapter);
-    }
-
-    private void enableSwipeToDeleteAndUndo() {
-        SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(this) {
+        MySwipeHelper mySwipeHelper = new MySwipeHelper(this, recyclerView, 200) {
 
             @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                final int position = viewHolder.getAdapterPosition();
-                final String item = mAdapter.getData().get(position);
-
+            public void instantiateMyButton(RecyclerView.ViewHolder viewHolder, List<MySwipeHelper.MyButton> buffer) {
+                buffer.add(new MyButton(
+                        MainActivity.this,
+                        "Delete",
+                        30,
+                        R.drawable.ic_delete_white_24dp,
+                        Color.parseColor("#FF3C30"),
+                        new MyButtonClickListener() {
+                            @Override
+                            public void onClick(int pos) {
+                                Toast.makeText(MainActivity.this, "Delete click", Toast.LENGTH_SHORT).show();
+                            }
+                        }));
 
                 /*
-                mAdapter.removeItem(position);
-
-                Snackbar snackbar = Snackbar
-                        .make(coordinatorLayout, "Item " + position + " was removed from the list", Snackbar.LENGTH_LONG);
-                snackbar.setAction("UNDO", new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                            mAdapter.restoreItem(item, position);
-                            recyclerView.scrollToPosition(position);
-                    }
-
-                });
-
-                snackbar.setActionTextColor(Color.YELLOW);
-                snackbar.show();
-                */
+                buffer.add(new MyButton(
+                        MainActivity.this,
+                        "Update",
+                        30,
+                        R.drawable.ic_edit_black_24dp,
+                        Color.parseColor("#FF9502"),
+                        new MyButtonClickListener() {
+                            @Override
+                            public void onClick(int pos) {
+                                Toast.makeText(MainActivity.this, "Update click", Toast.LENGTH_SHORT).show();
+                            }
+                        }));
+                 */
             }
 
         };
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
+        mySwipeHelper.getSwipeEscapeVelocity(1f);
+        mySwipeHelper.getSwipeVelocityThreshold(1f);
+
+        generateTravel();
+
+    }
+
+    private void generateTravel() {
+        List<Travel> travelList = new ArrayList<>();
+        Travel japon = new Travel("Voyage au Japon", "Du 04/02/2020", "Au 16/05/2020");
+        Travel turquie = new Travel("Voyage en Turquie", "Du 06/07/2020", "Au 15/08/2020");
+        Travel australie = new Travel("Voyage en Australie", "Du 21/06/2020", "Au 10/12/2020");
+
+        for (int i = 0; i < 20; i++) {
+            if (i % 3 == 0) {
+                travelList.add(japon);
+            } else if (i % 3 == 1) {
+                travelList.add(turquie);
+            } else {
+                travelList.add(australie);
+            }
+        }
+
+        adapter = new MyAdapter(this, travelList);
+        recyclerView.setAdapter(adapter);
     }
 
 }
