@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ import com.example.traveli.Adapter.MyAdapter;
 import com.example.traveli.Helper.MyButtonClickListener;
 import com.example.traveli.Helper.MySwipeHelper;
 import com.example.traveli.Model.Travel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -38,10 +41,18 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        final FloatingActionButton addTravel = findViewById(R.id.addTravel);
+        addTravel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Add Travel", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         MySwipeHelper mySwipeHelper = new MySwipeHelper(this, recyclerView, 200) {
 
             @Override
-            public void instantiateMyButton(RecyclerView.ViewHolder viewHolder, List<MySwipeHelper.MyButton> buffer) {
+            public void instantiateMyButton(final RecyclerView.ViewHolder viewHolder, final List<MySwipeHelper.MyButton> buffer) {
                 buffer.add(new MyButton(
                         MainActivity.this,
                         "Delete",
@@ -51,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
                         new MyButtonClickListener() {
                             @Override
                             public void onClick(int pos) {
-                                Toast.makeText(MainActivity.this, "Delete click", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(MainActivity.this, "Delete click", Toast.LENGTH_SHORT).show();
+                                removeTravel(pos);
                             }
                         }));
 
@@ -73,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
         };
 
-        mySwipeHelper.getSwipeEscapeVelocity(1f);
+        mySwipeHelper.getSwipeEscapeVelocity(0.1f);
         mySwipeHelper.getSwipeVelocityThreshold(1f);
 
         generateTravel();
@@ -98,6 +110,12 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new MyAdapter(this, travelList);
         recyclerView.setAdapter(adapter);
+    }
+
+    private void removeTravel(int pos) {
+        MyAdapter myAdapter = (MyAdapter) recyclerView.getAdapter();
+        myAdapter.removeTravel(pos);
+        myAdapter.notifyItemRemoved(pos);
     }
 
 }

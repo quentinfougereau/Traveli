@@ -42,4 +42,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public int getItemCount() {
         return travelList.size();
     }
+
+    public List<Travel> getTravelList() {
+        return this.travelList;
+    }
+
+    public void removeTravel(int pos) {
+        travelList.remove(pos);
+    }
 }
