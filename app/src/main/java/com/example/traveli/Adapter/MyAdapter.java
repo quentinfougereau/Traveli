@@ -36,6 +36,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.travelName.setText(travelList.get(position).getName());
         holder.travelDepartureDate.setText(travelList.get(position).getDepartureDate());
         holder.travelEndDate.setText(travelList.get(position).getEndDate());
+        holder.travel = travelList.get(position);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.traveli.Adapter;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -8,14 +9,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.traveli.CalendarActivity;
 import com.example.traveli.MainActivity;
+import com.example.traveli.Model.Travel;
 import com.example.traveli.R;
+import com.example.traveli.TravelActivity;
 
 import static androidx.core.content.ContextCompat.startActivity;
 
 class MyViewHolder extends RecyclerView.ViewHolder {
 
+    Travel travel;
     TextView  travelName, travelDepartureDate, travelEndDate;
 
     public MyViewHolder(@NonNull final View itemView) {
@@ -23,10 +26,12 @@ class MyViewHolder extends RecyclerView.ViewHolder {
         travelName = (TextView) itemView.findViewById(R.id.travelName);
         travelDepartureDate = (TextView) itemView.findViewById(R.id.travelDepartureDate);
         travelEndDate = (TextView) itemView.findViewById(R.id.travelEndDate);
+
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent = new Intent(v.getContext(), CalendarActivity.class);
+                Intent intent = new Intent(v.getContext(), TravelActivity.class);
+                intent.putExtra("travel",travel);
                 v.getContext().startActivity(intent);
             }
         });

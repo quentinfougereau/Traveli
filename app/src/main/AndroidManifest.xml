@@ -13,7 +13,7 @@
             android:name=".TestActivity"
             android:label="@string/title_activity_test"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".CalendarActivity" />
+        <activity android:name=".TravelActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
