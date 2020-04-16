@@ -1,53 +1,53 @@
 package com.example.traveli;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.traveli.Adapter.MyAdapter;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.traveli.Adapter.NoteAdapter;
 import com.example.traveli.Helper.MyButtonClickListener;
 import com.example.traveli.Helper.MySwipeHelper;
-import com.example.traveli.Model.Travel;
+import com.example.traveli.Model.Note;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class NoteActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    MyAdapter adapter;
+    NoteAdapter adapter;
     LinearLayoutManager linearLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_note);
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        final FloatingActionButton addTravel = findViewById(R.id.addTravel);
-        addTravel.setOnClickListener(new View.OnClickListener() {
+        final FloatingActionButton addNote = findViewById(R.id.addNote);
+        addNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Add Travel", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NoteActivity.this, "Add Note", Toast.LENGTH_SHORT).show();
             }
         });
 
         MySwipeHelper mySwipeHelper = new MySwipeHelper(this, recyclerView, 200) {
 
             @Override
-            public void instantiateMyButton(final RecyclerView.ViewHolder viewHolder, final List<MySwipeHelper.MyButton> buffer) {
+            public void instantiateMyButton(final RecyclerView.ViewHolder viewHolder, final List<MyButton> buffer) {
                 buffer.add(new MyButton(
-                        MainActivity.this,
+                        NoteActivity.this,
                         "Delete",
                         30,
                         R.drawable.ic_delete_white_24dp,
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClick(int pos) {
                                 //Toast.makeText(MainActivity.this, "Delete click", Toast.LENGTH_SHORT).show();
-                                removeTravel(pos);
+                                removeNote(pos);
                             }
                         }));
 
@@ -81,34 +81,28 @@ public class MainActivity extends AppCompatActivity {
         mySwipeHelper.getSwipeEscapeVelocity(0.1f);
         mySwipeHelper.getSwipeVelocityThreshold(1f);
 
-        generateTravel();
+        generateNote();
 
     }
 
-    private void generateTravel() {
-        List<Travel> travelList = new ArrayList<>();
-        Travel japon = new Travel("Voyage au Japon", "Du 04/02/2020", "Au 16/05/2020");
-        Travel turquie = new Travel("Voyage en Turquie", "Du 06/07/2020", "Au 15/08/2020");
-        Travel australie = new Travel("Voyage en Australie", "Du 21/06/2020", "Au 10/12/2020");
+    private void generateNote() {
+        List<Note> noteList = new ArrayList<>();
+        Note note1 = new Note("Les courses à faire", "Lorem ipsum...");
+        Note note2 = new Note("Adresses utiles", "Lorem ipsum...");
+        Note note3 = new Note("Numéro d'urgence", "Lorem ipsum...");
 
-        for (int i = 0; i < 20; i++) {
-            if (i % 3 == 0) {
-                travelList.add(japon);
-            } else if (i % 3 == 1) {
-                travelList.add(turquie);
-            } else {
-                travelList.add(australie);
-            }
-        }
+        noteList.add(note1);
+        noteList.add(note2);
+        noteList.add(note3);
 
-        adapter = new MyAdapter(this, travelList);
+        adapter = new NoteAdapter(this, noteList);
         recyclerView.setAdapter(adapter);
     }
 
-    private void removeTravel(int pos) {
-        MyAdapter myAdapter = (MyAdapter) recyclerView.getAdapter();
-        myAdapter.removeTravel(pos);
-        myAdapter.notifyItemRemoved(pos);
+    private void removeNote(int pos) {
+        NoteAdapter noteAdapter = (NoteAdapter) recyclerView.getAdapter();
+        noteAdapter.removeNote(pos);
+        noteAdapter.notifyItemRemoved(pos);
     }
 
 }
