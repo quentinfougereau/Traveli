@@ -31,12 +31,14 @@ public class TravelActivity extends Activity {
     EventAdapter adapter;
     LinearLayoutManager linearLayoutManager;
 
+    private Travel travel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_travel);
 
-        Travel travel = (Travel) getIntent().getSerializableExtra("travel");
+        travel = (Travel) getIntent().getSerializableExtra("travel");
         /*
         Toolbar travelToolbar = findViewById(R.id.travelToolbar);
         travelToolbar.setTitle(travel.getName());*/
@@ -59,7 +61,9 @@ public class TravelActivity extends Activity {
         addEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(TravelActivity.this, "Add Event", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(TravelActivity.this, AddEventActivity.class);
+                intent.putExtra("travel", travel);
+                startActivity(intent);
             }
         });
 

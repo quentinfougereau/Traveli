@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddEventActivity">
+
+    <ImageView
+        android:id="@+id/travelHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/description_logo"
+        android:src="@drawable/header_japon" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/nom_evenement"
+        android:layout_width="345dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginEnd="63dp"
+        android:hint="@string/nom_evenement" />
+
+    <!-- Sélectionner une date -->
+    <!-- Du -->
+    <TextView
+        android:id="@+id/du"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="300dp"
+        android:paddingRight="2dp"
+        android:hint="@string/du"
+        android:textStyle="bold"
+        android:textColorHint="@color/colorDuAu"
+        android:textSize="18dp" />
+
+    <!-- Du : jour mois heure -->
+    <TextView
+        android:id="@+id/duDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/selection_date"
+        android:layout_alignTop="@+id/du"
+        android:paddingLeft="30dp"
+        android:layout_toRightOf="@id/du"
+        android:textSize="18dp"
+
+        android:drawableRight="@mipmap/calendrier"
+        android:drawablePadding="20dp"/>
+    <!-- android:onClick="showDatePickerDialog" -->
+
+    <!-- Au -->
+    <TextView
+        android:id="@+id/au"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/du"
+        android:layout_alignEnd="@+id/du"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="380dp"
+        android:hint="@string/au"
+        android:textColorHint="@color/colorDuAu"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <!-- Au : jour mois heure -->
+    <TextView
+        android:id="@+id/auDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/selection_date"
+        android:layout_alignTop="@+id/au"
+        android:paddingLeft="30dp"
+        android:layout_toRightOf="@id/au"
+        android:textSize="18dp"
+
+        android:drawableRight="@mipmap/calendrier"
+        android:drawablePadding="20dp"/>
+
+    <!-- Encoche verte -->
+    <ImageView
+        android:id="@+id/encoche_verte"
+        android:visibility="invisible"
+        android:layout_width="61dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="120dp"
+        android:src="@drawable/encoche_verte" />
+
+    <!-- Encoche grise -->
+    <ImageView
+        android:id="@+id/encoche_grise"
+        android:layout_width="61dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="120dp"
+        android:src="@drawable/encoche_grise" />
+
+    <!-- Croix -->
+    <ImageView
+        android:id="@+id/croix"
+        android:layout_width="61dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="120dp"
+        android:src="@drawable/cross" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/note_evenement"
+        android:layout_width="283dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="450dp"
+        android:hint="@string/note_evenement"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Champs obligatoires -->
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="181dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="650dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/champs_obligatoires" />
+</RelativeLayout>

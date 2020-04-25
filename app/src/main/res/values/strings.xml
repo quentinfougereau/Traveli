@@ -12,4 +12,6 @@
     <string name="japanTravelName">Le Japon</string>
     <string name="chinaTravelName">La Chine</string>
     <string name="usaTravelName">Les USA</string>
+    <string name="nom_evenement">Nom de l\'événement*</string>
+    <string name="note_evenement">Notes*</string>
 </resources>

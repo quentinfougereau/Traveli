@@ -1,14 +1,14 @@
 package com.example.traveli;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,20 +16,15 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import com.example.traveli.Model.Travel;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Calendar;
 
-public class AddTravelActivity extends AppCompatActivity {
-    private static final String[] PAYS = new String[]{
-            "Argentine", "Belgique", "Canada", "Danmark", "Estonie", "France",
-            "Gabon", "Hongrie", "Inde", "Japon", "Kenya", "Libye", "Malaisie",
-            "Nepal", "Portugal", "Quatar", "Roumanie" , "Senegal", "Thailand",
-            "Ukraine", "Venezuela", "Yemen", "Zimbabwe"
-    };
+public class AddEventActivity extends AppCompatActivity {
+    private TextInputEditText nomEvenement;
+    private TextInputEditText noteEvenement;
 
-    private TextInputEditText nomDuPaysEdit;
-    private AutoCompleteTextView selectionPaysEdit;
     private ImageView croix;
     private ImageView encocheGrise;
     private ImageView encocheVerte;
@@ -40,43 +35,32 @@ public class AddTravelActivity extends AppCompatActivity {
     private static boolean estSelectionnerDateAu;
     private static boolean estSelectionnerDateDu;
 
-    @Override
+    private Travel travel;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_travel);
+        setContentView(R.layout.activity_add_event);
 
-        final AutoCompleteTextView actv = findViewById(R.id.actv); // Sélection d'un pays
-        ImageView dots = (ImageView) findViewById(R.id.dots); // Flèche de sélection d'un pays
+        travel = (Travel) getIntent().getSerializableExtra("travel");
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, PAYS);
-        actv.setAdapter(adapter); // Récupération de la liste des pays
-
-        nomDuPaysEdit = findViewById(R.id.nom_pays);
-        selectionPaysEdit = findViewById(R.id.actv);
+        nomEvenement = findViewById(R.id.nom_evenement);
+        noteEvenement = findViewById(R.id.note_evenement);
+        nomEvenement.addTextChangedListener(selectionWatcher);
+        noteEvenement.addTextChangedListener(selectionWatcher);
 
         croix = (ImageView) findViewById(R.id.croix);
         encocheGrise = (ImageView) findViewById(R.id.encoche_grise);
         encocheVerte = (ImageView) findViewById(R.id.encoche_verte);
 
-        nomDuPaysEdit.addTextChangedListener(selectionWatcher);
-        selectionPaysEdit.addTextChangedListener(selectionWatcher);
-
         selectionDateAu = (TextView) findViewById(R.id.auDate);
         selectionDateDu = (TextView) findViewById(R.id.duDate);
-
-        // Affichage des pays en cliquant sur la flèche
-        dots.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                actv.showDropDown();
-            }
-        });
 
         // Affichage d'un toast pour quitter en cliquant sur la croix
         croix.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(AddTravelActivity.this, MainActivity.class);
+                Intent intent = new Intent(AddEventActivity.this, TravelActivity.class);
+                intent.putExtra("travel", travel);
                 startActivity(intent);
             }
         });
@@ -84,7 +68,8 @@ public class AddTravelActivity extends AppCompatActivity {
         encocheVerte.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(AddTravelActivity.this, MainActivity.class);
+                Intent intent = new Intent(AddEventActivity.this, TravelActivity.class);
+                intent.putExtra("travel", travel);
                 startActivity(intent);
             }
         });
@@ -93,7 +78,7 @@ public class AddTravelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 estSelectionnerDateAu = true;
-                DatePickerFragment datePickerFragment = new DatePickerFragment();
+                AddTravelActivity.DatePickerFragment datePickerFragment = new AddTravelActivity.DatePickerFragment();
                 datePickerFragment.show(getSupportFragmentManager(), "datePicker");
             }
         });
@@ -102,7 +87,7 @@ public class AddTravelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 estSelectionnerDateDu = true;
-                DatePickerFragment datePickerFragment = new DatePickerFragment();
+                AddTravelActivity.DatePickerFragment datePickerFragment = new AddTravelActivity.DatePickerFragment();
                 datePickerFragment.show(getSupportFragmentManager(), "datePicker");
             }
         });
@@ -145,10 +130,10 @@ public class AddTravelActivity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            String nomPaysInput = nomDuPaysEdit.getText().toString().trim();
-            String selectionPaysInput = selectionPaysEdit.getText().toString().trim();
+            String nomEvenementInput = nomEvenement.getText().toString().trim();
+            String noteEvenementInput = noteEvenement.getText().toString().trim();
 
-            if(!nomPaysInput.isEmpty() && !selectionPaysInput.isEmpty() && estSelectionnerDateAu && estSelectionnerDateDu) {
+            if(!nomEvenementInput.isEmpty() && !noteEvenementInput.isEmpty()) {
                 encocheVerte.setVisibility(View.VISIBLE);
                 encocheGrise.setVisibility(View.INVISIBLE);
             }
