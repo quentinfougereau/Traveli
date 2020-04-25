@@ -1,8 +1,11 @@
 package com.example.traveli;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +16,7 @@ import com.example.traveli.Adapter.NoteAdapter;
 import com.example.traveli.Helper.MyButtonClickListener;
 import com.example.traveli.Helper.MySwipeHelper;
 import com.example.traveli.Model.Note;
+import com.example.traveli.Model.Travel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -23,11 +27,15 @@ public class NoteActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     NoteAdapter adapter;
     LinearLayoutManager linearLayoutManager;
+    float x1, x2, y1, y2;
+    Travel travel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
+
+        travel = (Travel) getIntent().getSerializableExtra("travel");
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -55,25 +63,9 @@ public class NoteActivity extends AppCompatActivity {
                         new MyButtonClickListener() {
                             @Override
                             public void onClick(int pos) {
-                                //Toast.makeText(MainActivity.this, "Delete click", Toast.LENGTH_SHORT).show();
                                 removeNote(pos);
                             }
                         }));
-
-                /*
-                buffer.add(new MyButton(
-                        MainActivity.this,
-                        "Update",
-                        30,
-                        R.drawable.ic_edit_black_24dp,
-                        Color.parseColor("#FF9502"),
-                        new MyButtonClickListener() {
-                            @Override
-                            public void onClick(int pos) {
-                                Toast.makeText(MainActivity.this, "Update click", Toast.LENGTH_SHORT).show();
-                            }
-                        }));
-                 */
             }
 
         };
@@ -104,5 +96,32 @@ public class NoteActivity extends AppCompatActivity {
         noteAdapter.removeNote(pos);
         noteAdapter.notifyItemRemoved(pos);
     }
+
+    public boolean onTouchEvent(MotionEvent touchEvent) {
+
+        switch (touchEvent.getAction()) {
+
+            case MotionEvent.ACTION_DOWN:
+                x1 = touchEvent.getX();
+                y1 = touchEvent.getY();
+                break;
+
+            case MotionEvent.ACTION_UP:
+                x2 = touchEvent.getX();
+                y2 = touchEvent.getY();
+
+                if (x1 > x2) {
+                    Intent intent = new Intent(NoteActivity.this, TravelActivity.class);
+                    intent.putExtra("travel", travel);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
+
+                break;
+        }
+        return false;
+
+    }
+
 
 }

@@ -1,22 +1,23 @@
 package com.example.traveli;
 
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Activity;
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.traveli.Adapter.EventAdapter;
-import com.example.traveli.Adapter.NoteAdapter;
 import com.example.traveli.Helper.MyButtonClickListener;
 import com.example.traveli.Helper.MySwipeHelper;
 import com.example.traveli.Model.Event;
-import com.example.traveli.Model.Note;
 import com.example.traveli.Model.Travel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -28,13 +29,15 @@ public class TravelActivity extends Activity {
     RecyclerView recyclerView;
     EventAdapter adapter;
     LinearLayoutManager linearLayoutManager;
+    float x1, x2, y1, y2;
+    Travel travel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_travel);
 
-        Travel travel = (Travel) getIntent().getSerializableExtra("travel");
+        travel = (Travel) getIntent().getSerializableExtra("travel");
 
         Toolbar travelToolbar = findViewById(R.id.travelToolbar);
         travelToolbar.setTitle(travel.getName());
@@ -102,6 +105,34 @@ public class TravelActivity extends Activity {
         EventAdapter eventAdapter = (EventAdapter) recyclerView.getAdapter();
         eventAdapter.removeEvent(pos);
         eventAdapter.notifyItemRemoved(pos);
+
+    }
+
+    public boolean onTouchEvent(MotionEvent touchEvent) {
+
+        switch (touchEvent.getAction()) {
+
+            case MotionEvent.ACTION_DOWN:
+                x1 = touchEvent.getX();
+                y1 = touchEvent.getY();
+                break;
+
+            case MotionEvent.ACTION_UP:
+                x2 = touchEvent.getX();
+                y2 = touchEvent.getY();
+
+                if (x1 < x2) {
+                    Intent intent = new Intent(this, NoteActivity.class);
+                    intent.putExtra("travel", travel);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                } else {
+                    //Swipe Right = Ecran Map
+                }
+
+                break;
+        }
+        return false;
 
     }
 
