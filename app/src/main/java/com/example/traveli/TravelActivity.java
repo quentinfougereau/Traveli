@@ -36,10 +36,17 @@ public class TravelActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_travel);
 
-/*        Travel travel = (Travel) getIntent().getSerializableExtra("travel");
-
+        Travel travel = (Travel) getIntent().getSerializableExtra("travel");
+        /*
         Toolbar travelToolbar = findViewById(R.id.travelToolbar);
         travelToolbar.setTitle(travel.getName());*/
+        ImageView header = findViewById(R.id.travelHeader);
+        if(travel.getName().equals(getResources().getString(R.string.japanTravelName)))
+            header.setImageDrawable(getResources().getDrawable(R.drawable.header_japon,null));
+        else if(travel.getName().equals(getResources().getString(R.string.chinaTravelName)))
+            header.setImageDrawable(getResources().getDrawable(R.drawable.header_chine,null));
+        else if(travel.getName().equals(getResources().getString(R.string.usaTravelName)))
+            header.setImageDrawable(getResources().getDrawable(R.drawable.header_usa,null));
 
         CalendarView calendar = findViewById(R.id.calendarView);
 

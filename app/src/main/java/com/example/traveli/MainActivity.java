@@ -91,17 +91,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void generateTravel() {
         List<Travel> travelList = new ArrayList<>();
-        Travel japon = new Travel("Voyage au Japon", "Du 04/02/2020", "Au 16/05/2020");
-        Travel turquie = new Travel("Voyage en Turquie", "Du 06/07/2020", "Au 15/08/2020");
-        Travel australie = new Travel("Voyage en Australie", "Du 21/06/2020", "Au 10/12/2020");
+        Travel japon = new Travel(getResources().getString(R.string.japanTravelName), "Du 04/02/2020", "Au 16/05/2020");
+        Travel chine = new Travel(getResources().getString(R.string.chinaTravelName), "Du 06/07/2020", "Au 15/08/2020");
+        Travel usa = new Travel(getResources().getString(R.string.usaTravelName), "Du 21/06/2020", "Au 10/12/2020");
 
         for (int i = 0; i < 20; i++) {
             if (i % 3 == 0) {
                 travelList.add(japon);
             } else if (i % 3 == 1) {
-                travelList.add(turquie);
+                travelList.add(chine);
             } else {
-                travelList.add(australie);
+                travelList.add(usa);
             }
         }
 

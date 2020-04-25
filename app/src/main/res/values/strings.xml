@@ -9,4 +9,7 @@
     <string name="du">Du :</string>
     <string name="au">Au :</string>
     <string name="selection_date">jour/mois/heure*</string>
+    <string name="japanTravelName">Voyage au Japon</string>
+    <string name="chinaTravelName">Voyage en Chine</string>
+    <string name="usaTravelName">Voyage aux États Unis</string>
 </resources>
