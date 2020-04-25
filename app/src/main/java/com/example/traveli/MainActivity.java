@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -45,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
         addTravel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Add Travel", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(MainActivity.this, "Add Travel", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, AddTravel.class);
+                startActivity(intent);
             }
         });
 
