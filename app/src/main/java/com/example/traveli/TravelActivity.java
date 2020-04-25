@@ -5,10 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CalendarView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.traveli.Adapter.EventAdapter;
@@ -34,10 +36,10 @@ public class TravelActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_travel);
 
-        Travel travel = (Travel) getIntent().getSerializableExtra("travel");
+/*        Travel travel = (Travel) getIntent().getSerializableExtra("travel");
 
         Toolbar travelToolbar = findViewById(R.id.travelToolbar);
-        travelToolbar.setTitle(travel.getName());
+        travelToolbar.setTitle(travel.getName());*/
 
         CalendarView calendar = findViewById(R.id.calendarView);
 
@@ -46,11 +48,20 @@ public class TravelActivity extends Activity {
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        final FloatingActionButton addEvent = findViewById(R.id.addEvent);
+        final ImageView addEvent = findViewById(R.id.addEvent);
         addEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(TravelActivity.this, "Add Event", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        final ImageView returnHomePage = findViewById(R.id.homePage);
+        returnHomePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TravelActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -62,7 +73,7 @@ public class TravelActivity extends Activity {
                         TravelActivity.this,
                         "Delete",
                         30,
-                        R.drawable.ic_delete_white_24dp,
+                        R.mipmap.bin,
                         Color.parseColor("#FF3C30"),
                         new MyButtonClickListener() {
                             @Override
