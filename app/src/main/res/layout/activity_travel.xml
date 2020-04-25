@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CalendarActivity">
+    tools:context=".TravelActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/travelToolbar"
@@ -24,12 +24,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/travelToolbar" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/eventRecyclerView"
-        android:layout_width="409dp"
-        android:layout_height="335dp"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+        app:layout_constraintTop_toBottomOf="@+id/calendarView">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:contentDescription="Add"
+            android:src="@drawable/ic_add_black_24dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/eventRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
