@@ -12,7 +12,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -21,7 +20,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Calendar;
 
-public class AddTravel extends AppCompatActivity {
+public class AddTravelActivity extends AppCompatActivity {
     private static final String[] PAYS = new String[]{
             "Argentine", "Belgique", "Canada", "Danmark", "Estonie", "France",
             "Gabon", "Hongrie", "Inde", "Japon", "Kenya", "Libye", "Malaisie",
@@ -80,7 +79,7 @@ public class AddTravel extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 // Toast.makeText(getApplicationContext(), toastCroixMessage, Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(AddTravel.this, MainActivity.class);
+                Intent intent = new Intent(AddTravelActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -88,7 +87,7 @@ public class AddTravel extends AppCompatActivity {
         encocheVerte.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(AddTravel.this, MainActivity.class);
+                Intent intent = new Intent(AddTravelActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
