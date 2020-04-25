@@ -95,15 +95,9 @@ public class MainActivity extends AppCompatActivity {
         Travel chine = new Travel(getResources().getString(R.string.chinaTravelName), "Du 06/07/2020", "Au 15/08/2020");
         Travel usa = new Travel(getResources().getString(R.string.usaTravelName), "Du 21/06/2020", "Au 10/12/2020");
 
-        for (int i = 0; i < 20; i++) {
-            if (i % 3 == 0) {
-                travelList.add(japon);
-            } else if (i % 3 == 1) {
-                travelList.add(chine);
-            } else {
-                travelList.add(usa);
-            }
-        }
+        travelList.add(japon);
+        travelList.add(chine);
+        travelList.add(usa);
 
         adapter = new TravelAdapter(this, travelList);
         recyclerView.setAdapter(adapter);
