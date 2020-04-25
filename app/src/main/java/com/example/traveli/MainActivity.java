@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -42,11 +43,10 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        final FloatingActionButton addTravel = findViewById(R.id.addTravel);
+        final ImageView addTravel = findViewById(R.id.addTravel);
         addTravel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Toast.makeText(MainActivity.this, "Add Travel", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, AddTravel.class);
                 startActivity(intent);
             }
@@ -60,12 +60,11 @@ public class MainActivity extends AppCompatActivity {
                         MainActivity.this,
                         "Delete",
                         30,
-                        R.drawable.ic_delete_white_24dp,
+                        R.mipmap.bin,
                         Color.parseColor("#FF3C30"),
                         new MyButtonClickListener() {
                             @Override
                             public void onClick(int pos) {
-                                //Toast.makeText(MainActivity.this, "Delete click", Toast.LENGTH_SHORT).show();
                                 removeTravel(pos);
                             }
                         }));
@@ -92,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
         mySwipeHelper.getSwipeVelocityThreshold(1f);
 
         generateTravel();
-
     }
 
     private void generateTravel() {
@@ -120,5 +118,4 @@ public class MainActivity extends AppCompatActivity {
         myAdapter.removeTravel(pos);
         myAdapter.notifyItemRemoved(pos);
     }
-
 }

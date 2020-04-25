@@ -127,8 +127,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Flèche sélectionner un pays -->
-
-
     <ImageView
         android:id="@+id/dots"
         android:layout_width="wrap_content"
@@ -140,6 +138,7 @@
         android:paddingRight="20dp"
         android:paddingLeft="20dp"
         android:src="@mipmap/dots" />
+
     <!-- Champs obligatoires -->
     <TextView
         android:id="@+id/textView"

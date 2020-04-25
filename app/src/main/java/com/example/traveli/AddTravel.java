@@ -22,7 +22,6 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.Calendar;
 
 public class AddTravel extends AppCompatActivity {
-
     private static final String[] PAYS = new String[]{
             "Argentine", "Belgique", "Canada", "Danmark", "Estonie", "France",
             "Gabon", "Hongrie", "Inde", "Japon", "Kenya", "Libye", "Malaisie",
@@ -86,11 +85,9 @@ public class AddTravel extends AppCompatActivity {
             }
         });
 
-        // Affichage d'un toast pour accepter la création d'un voyage
         encocheVerte.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                // Toast.makeText(getApplicationContext(), toastEncocheVerteMessage, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(AddTravel.this, MainActivity.class);
                 startActivity(intent);
             }
@@ -100,8 +97,6 @@ public class AddTravel extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 estSelectionnerDateAu = true;
-
-
                 DatePickerFragment datePickerFragment = new DatePickerFragment();
                 datePickerFragment.show(getSupportFragmentManager(), "datePicker");
             }
@@ -111,7 +106,6 @@ public class AddTravel extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 estSelectionnerDateDu = true;
-
                 DatePickerFragment datePickerFragment = new DatePickerFragment();
                 datePickerFragment.show(getSupportFragmentManager(), "datePicker");
             }
@@ -123,13 +117,11 @@ public class AddTravel extends AppCompatActivity {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current date as the default date in the picker
             final Calendar c = Calendar.getInstance();
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
 
-            // Create a new instance of DatePickerDialog and return it
             return new DatePickerDialog(getActivity(), this, year, month, day);
         }
 
