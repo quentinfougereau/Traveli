@@ -127,7 +127,10 @@ public class TravelActivity extends Activity {
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 } else {
-                    //Swipe Right = Ecran Map
+                    Intent intent = new Intent(this, MapActivity.class);
+                    intent.putExtra("travel", travel);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
 
                 break;
