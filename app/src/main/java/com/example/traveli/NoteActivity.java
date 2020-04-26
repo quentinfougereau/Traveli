@@ -55,7 +55,9 @@ public class NoteActivity extends AppCompatActivity {
         addNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(NoteActivity.this, "Add Note", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(NoteActivity.this, EditShowEventActivity.class);
+                intent.putExtra("travel", travel);
+                startActivity(intent);
             }
         });
 
