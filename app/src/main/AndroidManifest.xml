@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MapActivity"></activity>
-        <activity android:name=".EditShowEventActivity" />
+        <activity android:name=".AddNoteActivity" />
         <activity android:name=".NoteActivity" />
         <activity android:name=".TravelActivity" />
         <activity android:name=".AddTravelActivity" />

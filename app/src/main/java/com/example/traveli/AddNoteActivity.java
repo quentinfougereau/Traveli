@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import com.example.traveli.Model.Travel;
 import com.google.android.material.textfield.TextInputEditText;
 
-public class EditShowEventActivity extends AppCompatActivity {
+public class AddNoteActivity extends AppCompatActivity {
 
     private TextInputEditText nomEvenement;
     private TextInputEditText noteEvenement;
@@ -26,7 +26,7 @@ public class EditShowEventActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_show_event);
+        setContentView(R.layout.activity_add_note);
 
         travel = (Travel) getIntent().getSerializableExtra("travel");
 
@@ -50,7 +50,7 @@ public class EditShowEventActivity extends AppCompatActivity {
         croix.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(EditShowEventActivity.this, NoteActivity.class);
+                Intent intent = new Intent(AddNoteActivity.this, NoteActivity.class);
                 intent.putExtra("travel", travel);
                 startActivity(intent);
             }
@@ -59,7 +59,7 @@ public class EditShowEventActivity extends AppCompatActivity {
         encocheVerte.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(EditShowEventActivity.this, NoteActivity.class);
+                Intent intent = new Intent(AddNoteActivity.this, NoteActivity.class);
                 intent.putExtra("travel", travel);
                 startActivity(intent);
             }

@@ -5,9 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,7 +16,6 @@ import com.example.traveli.Helper.MyButtonClickListener;
 import com.example.traveli.Helper.MySwipeHelper;
 import com.example.traveli.Model.Note;
 import com.example.traveli.Model.Travel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +52,7 @@ public class NoteActivity extends AppCompatActivity {
         addNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NoteActivity.this, EditShowEventActivity.class);
+                Intent intent = new Intent(NoteActivity.this, AddNoteActivity.class);
                 intent.putExtra("travel", travel);
                 startActivity(intent);
             }

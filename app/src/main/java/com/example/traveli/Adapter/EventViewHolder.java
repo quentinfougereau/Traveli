@@ -7,7 +7,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.traveli.EditShowEventActivity;
+import com.example.traveli.AddNoteActivity;
 import com.example.traveli.Model.Event;
 import com.example.traveli.R;
 
@@ -25,7 +25,7 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), EditShowEventActivity.class);
+                Intent intent = new Intent(v.getContext(), AddNoteActivity.class);
                 intent.putExtra("event", event);
                 //final Intent intent = new Intent(v.getContext(), NoteActivity.class);
                 v.getContext().startActivity(intent);
