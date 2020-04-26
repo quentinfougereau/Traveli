@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.widget.ImageView;
 
 import com.example.traveli.Model.Travel;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,11 +29,15 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-        Toolbar travelToolbar = findViewById(R.id.travelMapToolbar);
-        //travelToolbar.setTitle("La carte magique");
-
         travel = (Travel) getIntent().getSerializableExtra("travel");
-        travelToolbar.setTitle(travel.getName());
+
+        ImageView header = findViewById(R.id.travelHeader);
+        if(travel.getName().equals(getResources().getString(R.string.japanTravelName)))
+            header.setImageDrawable(getResources().getDrawable(R.drawable.header_japon,null));
+        else if(travel.getName().equals(getResources().getString(R.string.chinaTravelName)))
+            header.setImageDrawable(getResources().getDrawable(R.drawable.header_chine,null));
+        else if(travel.getName().equals(getResources().getString(R.string.usaTravelName)))
+            header.setImageDrawable(getResources().getDrawable(R.drawable.header_usa,null));
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);

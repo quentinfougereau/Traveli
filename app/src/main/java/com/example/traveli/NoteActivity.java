@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,12 +38,20 @@ public class NoteActivity extends AppCompatActivity {
 
         travel = (Travel) getIntent().getSerializableExtra("travel");
 
+        ImageView header = findViewById(R.id.travelHeader);
+        if(travel.getName().equals(getResources().getString(R.string.japanTravelName)))
+            header.setImageDrawable(getResources().getDrawable(R.drawable.header_japon,null));
+        else if(travel.getName().equals(getResources().getString(R.string.chinaTravelName)))
+            header.setImageDrawable(getResources().getDrawable(R.drawable.header_chine,null));
+        else if(travel.getName().equals(getResources().getString(R.string.usaTravelName)))
+            header.setImageDrawable(getResources().getDrawable(R.drawable.header_usa,null));
+
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        final FloatingActionButton addNote = findViewById(R.id.addNote);
+        final ImageView addNote = findViewById(R.id.addNote);
         addNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +67,7 @@ public class NoteActivity extends AppCompatActivity {
                         NoteActivity.this,
                         "Delete",
                         30,
-                        R.drawable.ic_delete_white_24dp,
+                        R.mipmap.bin,
                         Color.parseColor("#FF3C30"),
                         new MyButtonClickListener() {
                             @Override

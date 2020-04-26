@@ -29,19 +29,27 @@ public class AddEventActivity extends AppCompatActivity {
     private ImageView encocheGrise;
     private ImageView encocheVerte;
 
+    private Travel travel;
+
     private static TextView selectionDateAu;
     private static TextView selectionDateDu;
 
     private static boolean estSelectionnerDateAu;
     private static boolean estSelectionnerDateDu;
 
-    private Travel travel;
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
 
         travel = (Travel) getIntent().getSerializableExtra("travel");
+
+        ImageView header = findViewById(R.id.travelHeader);
+        if(travel.getName().equals(getResources().getString(R.string.japanTravelName)))
+            header.setImageDrawable(getResources().getDrawable(R.drawable.header_japon,null));
+        else if(travel.getName().equals(getResources().getString(R.string.chinaTravelName)))
+            header.setImageDrawable(getResources().getDrawable(R.drawable.header_chine,null));
+        else if(travel.getName().equals(getResources().getString(R.string.usaTravelName)))
+            header.setImageDrawable(getResources().getDrawable(R.drawable.header_usa,null));
 
         nomEvenement = findViewById(R.id.nom_evenement);
         noteEvenement = findViewById(R.id.note_evenement);

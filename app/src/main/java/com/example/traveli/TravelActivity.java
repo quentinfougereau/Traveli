@@ -33,6 +33,9 @@ public class TravelActivity extends Activity {
     float x1, x2, y1, y2;
     private Travel travel;
 
+    String evenement1;
+    String evenement2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,12 +44,21 @@ public class TravelActivity extends Activity {
         travel = (Travel) getIntent().getSerializableExtra("travel");
 
         ImageView header = findViewById(R.id.travelHeader);
-        if(travel.getName().equals(getResources().getString(R.string.japanTravelName)))
-            header.setImageDrawable(getResources().getDrawable(R.drawable.header_japon,null));
-        else if(travel.getName().equals(getResources().getString(R.string.chinaTravelName)))
-            header.setImageDrawable(getResources().getDrawable(R.drawable.header_chine,null));
-        else if(travel.getName().equals(getResources().getString(R.string.usaTravelName)))
-            header.setImageDrawable(getResources().getDrawable(R.drawable.header_usa,null));
+        if(travel.getName().equals(getResources().getString(R.string.japanTravelName))) {
+            header.setImageDrawable(getResources().getDrawable(R.drawable.header_japon, null));
+            evenement1 = "Ascension du Mont Fuji";
+            evenement2 = "Visite du quartier Shinjuku";
+        }
+        else if(travel.getName().equals(getResources().getString(R.string.chinaTravelName))) {
+            header.setImageDrawable(getResources().getDrawable(R.drawable.header_chine, null));
+            evenement1 = "Visite à Beijin";
+            evenement2 = "Visite à Shanghai";
+        }
+        else if(travel.getName().equals(getResources().getString(R.string.usaTravelName))) {
+            header.setImageDrawable(getResources().getDrawable(R.drawable.header_usa, null));
+            evenement1 = "Visite à NYC";
+            evenement2 = "Road trip route 66";
+        }
 
         CalendarView calendar = findViewById(R.id.calendarView);
 
@@ -92,37 +104,31 @@ public class TravelActivity extends Activity {
                         }));
 
             }
-
         };
 
         mySwipeHelper.getSwipeEscapeVelocity(0.1f);
         mySwipeHelper.getSwipeVelocityThreshold(1f);
 
         generateEvent();
-
-
     }
 
     private void generateEvent() {
 
         List<Event> eventList = new ArrayList<>();
-        Event event1 = new Event("Ascension du Mont Fuji", "04:00-", "09:00");
-        Event event2 = new Event("Visite du quartier Shinjuku", "08:00-", "12:00");
+        Event event1 = new Event(evenement1, "04:00 -", "09:00");
+        Event event2 = new Event(evenement2, "08:00 -", "12:00");
 
         eventList.add(event1);
         eventList.add(event2);
 
         adapter = new EventAdapter(this, eventList);
         recyclerView.setAdapter(adapter);
-
     }
 
     private void removeEvent(int pos) {
-
         EventAdapter eventAdapter = (EventAdapter) recyclerView.getAdapter();
         eventAdapter.removeEvent(pos);
         eventAdapter.notifyItemRemoved(pos);
-
     }
 
     public boolean onTouchEvent(MotionEvent touchEvent) {
