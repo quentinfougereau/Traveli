@@ -23,7 +23,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Calendar;
 
-public class AddEventActivity extends AppCompatActivity {
+public class AddEventActivity extends AppCompatActivity implements View.OnClickListener {
     private TextInputEditText nomEvenement;
     private TextInputEditText noteEvenement;
 
@@ -49,12 +49,12 @@ public class AddEventActivity extends AppCompatActivity {
         travel = (Travel) getIntent().getSerializableExtra("travel");
 
         ImageView header = findViewById(R.id.travelHeader);
-        if(travel.getName().equals(getResources().getString(R.string.japanTravelName)))
-            header.setImageDrawable(getResources().getDrawable(R.drawable.header_japon,null));
-        else if(travel.getName().equals(getResources().getString(R.string.chinaTravelName)))
-            header.setImageDrawable(getResources().getDrawable(R.drawable.header_chine,null));
-        else if(travel.getName().equals(getResources().getString(R.string.usaTravelName)))
-            header.setImageDrawable(getResources().getDrawable(R.drawable.header_usa,null));
+        if (travel.getName().equals(getResources().getString(R.string.japanTravelName)))
+            header.setImageDrawable(getResources().getDrawable(R.drawable.header_japon, null));
+        else if (travel.getName().equals(getResources().getString(R.string.chinaTravelName)))
+            header.setImageDrawable(getResources().getDrawable(R.drawable.header_chine, null));
+        else if (travel.getName().equals(getResources().getString(R.string.usaTravelName)))
+            header.setImageDrawable(getResources().getDrawable(R.drawable.header_usa, null));
 
         nomEvenement = findViewById(R.id.nom_evenement);
         noteEvenement = findViewById(R.id.note_evenement);
@@ -71,7 +71,7 @@ public class AddEventActivity extends AppCompatActivity {
         heureAuEdit = (TextView) findViewById(R.id.heureAuEdit);
         heureDuEdit = (TextView) findViewById(R.id.heureDuEdit);
 
-        heureAuEdit.setOnClickListener(new View.OnClickListener() {
+/*        heureAuEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Calendar c = Calendar.getInstance();
@@ -79,33 +79,29 @@ public class AddEventActivity extends AppCompatActivity {
                 int mMinute = c.get(Calendar.MINUTE);
 
                 // Launch Time Picker Dialog
-                TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                        new TimePickerDialog.OnTimeSetListener() {
-
+                TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
                             @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay,
-                                                  int minute) {
-
-                                txtTime.setText(hourOfDay + ":" + minute);
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                txt.setText(hourOfDay + ":" + minute);
                             }
-                        }, mHour, mMinute, false);
+                        }, mHour, mMinute, true);
                 timePickerDialog.show();
             }
-        });
+        });*/
 
         // Affichage d'un toast pour quitter en cliquant sur la croix
-        croix.setOnClickListener(new View.OnClickListener(){
+        croix.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 Intent intent = new Intent(AddEventActivity.this, TravelActivity.class);
                 intent.putExtra("travel", travel);
                 startActivity(intent);
             }
         });
 
-        encocheVerte.setOnClickListener(new View.OnClickListener(){
+        encocheVerte.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 Intent intent = new Intent(AddEventActivity.this, TravelActivity.class);
                 intent.putExtra("travel", travel);
                 startActivity(intent);
@@ -133,8 +129,32 @@ public class AddEventActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v == heureAuEdit) {
+
+            // Get Current Time
+            final Calendar c = Calendar.getInstance();
+            int mHour = c.get(Calendar.HOUR_OF_DAY);
+            int mMinute = c.get(Calendar.MINUTE);
+
+            // Launch Time Picker Dialog
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                    new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay,
+                                              int minute) {
+
+                            heureAuEdit.setText(hourOfDay + ":" + minute);
+                        }
+                    }, mHour, mMinute, false);
+            timePickerDialog.show();
+        }
+    }
+
     public static class DatePickerFragment extends DialogFragment
-            implements DatePickerDialog.OnDateSetListener  {
+            implements DatePickerDialog.OnDateSetListener {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -150,10 +170,9 @@ public class AddEventActivity extends AppCompatActivity {
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
             month = month + 1;
             String date = dayOfMonth + "/" + month + "/" + year;
-            if(estSelectionnerDateAu) {
+            if (estSelectionnerDateAu) {
                 selectionDateAu.setText(date);
-            }
-            else if(estSelectionnerDateDu) {
+            } else if (estSelectionnerDateDu) {
                 selectionDateDu.setText(date);
             }
         }
@@ -162,22 +181,23 @@ public class AddEventActivity extends AppCompatActivity {
     private TextWatcher selectionWatcher = new TextWatcher() {
         // Pas utilisé
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
 
         // Pas utilisé
         @Override
-        public void afterTextChanged(Editable s) {}
+        public void afterTextChanged(Editable s) {
+        }
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             String nomEvenementInput = nomEvenement.getText().toString().trim();
             String noteEvenementInput = noteEvenement.getText().toString().trim();
 
-            if(!nomEvenementInput.isEmpty() && !noteEvenementInput.isEmpty()) {
+            if (!nomEvenementInput.isEmpty() && !noteEvenementInput.isEmpty()) {
                 encocheVerte.setVisibility(View.VISIBLE);
                 encocheGrise.setVisibility(View.INVISIBLE);
-            }
-            else {
+            } else {
                 encocheVerte.setVisibility(View.INVISIBLE);
                 encocheGrise.setVisibility(View.VISIBLE);
             }
