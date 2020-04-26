@@ -42,6 +42,9 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
     private static boolean estSelectionnerDateAu;
     private static boolean estSelectionnerDateDu;
 
+    private static boolean estSelectionnerHeureAu;
+    private static boolean estSelectionnerHeureDu;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
@@ -71,23 +74,8 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
         heureAuEdit = (TextView) findViewById(R.id.heureAuEdit);
         heureDuEdit = (TextView) findViewById(R.id.heureDuEdit);
 
-/*        heureAuEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Calendar c = Calendar.getInstance();
-                int mHour = c.get(Calendar.HOUR_OF_DAY);
-                int mMinute = c.get(Calendar.MINUTE);
-
-                // Launch Time Picker Dialog
-                TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                txt.setText(hourOfDay + ":" + minute);
-                            }
-                        }, mHour, mMinute, true);
-                timePickerDialog.show();
-            }
-        });*/
+        heureAuEdit.setOnClickListener(this);
+        heureDuEdit.setOnClickListener(this);
 
         // Affichage d'un toast pour quitter en cliquant sur la croix
         croix.setOnClickListener(new View.OnClickListener() {
@@ -125,14 +113,31 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 datePickerFragment.show(getSupportFragmentManager(), "datePicker");
             }
         });
-
-
     }
 
     @Override
     public void onClick(View v) {
-        if (v == heureAuEdit) {
+        if (v == heureDuEdit) {
+            // Get Current Time
+            final Calendar c = Calendar.getInstance();
+            int mHour = c.get(Calendar.HOUR_OF_DAY);
+            int mMinute = c.get(Calendar.MINUTE);
 
+            // Launch Time Picker Dialog
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                    new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay,
+                                              int minute) {
+
+                            heureDuEdit.setText(hourOfDay + ":" + minute);
+                            estSelectionnerHeureDu = true;
+                        }
+                    }, mHour, mMinute, false);
+            timePickerDialog.show();
+        }
+        else if (v == heureAuEdit) {
             // Get Current Time
             final Calendar c = Calendar.getInstance();
             int mHour = c.get(Calendar.HOUR_OF_DAY);
@@ -147,6 +152,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                                               int minute) {
 
                             heureAuEdit.setText(hourOfDay + ":" + minute);
+                            estSelectionnerHeureAu = true;
                         }
                     }, mHour, mMinute, false);
             timePickerDialog.show();
@@ -194,7 +200,9 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
             String nomEvenementInput = nomEvenement.getText().toString().trim();
             String noteEvenementInput = noteEvenement.getText().toString().trim();
 
-            if (!nomEvenementInput.isEmpty() && !noteEvenementInput.isEmpty()) {
+            if (!nomEvenementInput.isEmpty() && !noteEvenementInput.isEmpty()
+            && estSelectionnerDateAu && estSelectionnerDateDu
+            && estSelectionnerHeureAu && estSelectionnerHeureAu) {
                 encocheVerte.setVisibility(View.VISIBLE);
                 encocheGrise.setVisibility(View.INVISIBLE);
             } else {
