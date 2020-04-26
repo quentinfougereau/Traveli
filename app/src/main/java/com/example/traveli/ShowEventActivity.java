@@ -21,7 +21,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Calendar;
 
-public class AddEventActivity extends AppCompatActivity {
+public class ShowEventActivity extends AppCompatActivity {
     private TextInputEditText nomEvenement;
     private TextInputEditText noteEvenement;
 
@@ -67,7 +67,7 @@ public class AddEventActivity extends AppCompatActivity {
         croix.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(AddEventActivity.this, TravelActivity.class);
+                Intent intent = new Intent(ShowEventActivity.this, TravelActivity.class);
                 intent.putExtra("travel", travel);
                 startActivity(intent);
             }
@@ -76,7 +76,7 @@ public class AddEventActivity extends AppCompatActivity {
         encocheVerte.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(AddEventActivity.this, TravelActivity.class);
+                Intent intent = new Intent(ShowEventActivity.this, TravelActivity.class);
                 intent.putExtra("travel", travel);
                 startActivity(intent);
             }
@@ -86,7 +86,7 @@ public class AddEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 estSelectionnerDateAu = true;
-                AddEventActivity.DatePickerFragment datePickerFragment = new AddEventActivity.DatePickerFragment();
+                AddTravelActivity.DatePickerFragment datePickerFragment = new AddTravelActivity.DatePickerFragment();
                 datePickerFragment.show(getSupportFragmentManager(), "datePicker");
             }
         });
@@ -95,7 +95,7 @@ public class AddEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 estSelectionnerDateDu = true;
-                AddEventActivity.DatePickerFragment datePickerFragment = new AddEventActivity.DatePickerFragment();
+                AddTravelActivity.DatePickerFragment datePickerFragment = new AddTravelActivity.DatePickerFragment();
                 datePickerFragment.show(getSupportFragmentManager(), "datePicker");
             }
         });
@@ -107,8 +107,7 @@ public class AddEventActivity extends AppCompatActivity {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Calendar c = Calendar.getInstance();
-            int hour = c.get(Calendar.HOUR);
-            int year = c.get(Calendar.YEAR);
+            int hour = c.get(Calendar.HOUR_OF_DAY);
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
 
@@ -116,9 +115,9 @@ public class AddEventActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onDateSet(DatePicker view, int month, int dayOfMonth, int hour) {
+        public void onDateSet(DatePicker view, int month, int dayOfMonth, int hourOfDay) {
             month = month + 1;
-            String date = dayOfMonth + "/" + month + " - " + hour;
+            String date = dayOfMonth + "/" + month + " - " + hourOfDay;
             if(estSelectionnerDateAu) {
                 selectionDateAu.setText(date);
             }

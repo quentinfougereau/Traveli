@@ -9,7 +9,8 @@
     <string name="description_fleche">Fleche de selection de pays</string>
     <string name="du">Du :</string>
     <string name="au">Au :</string>
-    <string name="selection_date">jour/mois/heure*</string>
+    <string name="selection_date_voyage">jour/mois/année*</string>
+    <string name="selection_date_evenement">jour/mois/heure*</string>
     <string name="japanTravelName">Le Japon</string>
     <string name="chinaTravelName">La Chine</string>
     <string name="usaTravelName">Les USA</string>
