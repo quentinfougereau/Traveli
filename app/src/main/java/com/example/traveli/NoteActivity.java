@@ -95,7 +95,7 @@ public class NoteActivity extends AppCompatActivity {
         noteList.add(note2);
         noteList.add(note3);
 
-        adapter = new NoteAdapter(this, noteList);
+        adapter = new NoteAdapter(this, noteList, travel);
         recyclerView.setAdapter(adapter);
     }
 

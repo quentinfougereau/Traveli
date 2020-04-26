@@ -1,6 +1,8 @@
 package com.example.traveli.Model;
 
-public class Note {
+import java.io.Serializable;
+
+public class Note implements Serializable  {
 
     private String name;
 
