@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout android:id="@+id/relativeLayout"
+<RelativeLayout android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
     tools:context=".MainActivity"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addTravel"
-            android:layout_width="wrap_content"
+        <ImageView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:contentDescription="Add"
-            android:src="@drawable/ic_add_black_24dp"
-            android:visibility="visible" />
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/description_logo"
+            android:src="@drawable/logo" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="110dp" />
 
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
-
+        <ImageView
+            android:id="@+id/addTravel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="300dp"
+            android:layout_marginTop="670dp"
+            android:contentDescription="Add"
+            android:src="@mipmap/add_button"/>
+</RelativeLayout>

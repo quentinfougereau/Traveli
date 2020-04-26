@@ -2,4 +2,17 @@
     <string name="app_name">Traveli</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="google_maps_key">AIzaSyDa4cAQnuvB89Zl4WGnam02QwD8ARCRnK4</string>
+    <string name="nom_du_voyage">Nom du voyage*</string>
+    <string name="selection_pays">Sélectionner un pays*</string>
+    <string name="champs_obligatoires">* Champs obligatoires</string>
+    <string name="description_logo">Logo Traveli</string>
+    <string name="description_fleche">Fleche de selection de pays</string>
+    <string name="du">Du :</string>
+    <string name="au">Au :</string>
+    <string name="selection_date">jour/mois/heure*</string>
+    <string name="japanTravelName">Le Japon</string>
+    <string name="chinaTravelName">La Chine</string>
+    <string name="usaTravelName">Les USA</string>
+    <string name="nom_evenement">Nom de l\'événement*</string>
+    <string name="note_evenement">Notes*</string>
 </resources>

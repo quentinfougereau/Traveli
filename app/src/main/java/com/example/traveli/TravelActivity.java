@@ -1,13 +1,14 @@
 package com.example.traveli;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CalendarView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
@@ -30,7 +31,7 @@ public class TravelActivity extends Activity {
     EventAdapter adapter;
     LinearLayoutManager linearLayoutManager;
     float x1, x2, y1, y2;
-    Travel travel;
+    private Travel travel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +40,13 @@ public class TravelActivity extends Activity {
 
         travel = (Travel) getIntent().getSerializableExtra("travel");
 
-        Toolbar travelToolbar = findViewById(R.id.travelToolbar);
-        travelToolbar.setTitle(travel.getName());
+        ImageView header = findViewById(R.id.travelHeader);
+        if(travel.getName().equals(getResources().getString(R.string.japanTravelName)))
+            header.setImageDrawable(getResources().getDrawable(R.drawable.header_japon,null));
+        else if(travel.getName().equals(getResources().getString(R.string.chinaTravelName)))
+            header.setImageDrawable(getResources().getDrawable(R.drawable.header_chine,null));
+        else if(travel.getName().equals(getResources().getString(R.string.usaTravelName)))
+            header.setImageDrawable(getResources().getDrawable(R.drawable.header_usa,null));
 
         CalendarView calendar = findViewById(R.id.calendarView);
 
@@ -49,11 +55,22 @@ public class TravelActivity extends Activity {
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        final FloatingActionButton addEvent = findViewById(R.id.addEvent);
+        final ImageView addEvent = findViewById(R.id.addEvent);
         addEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(TravelActivity.this, "Add Event", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(TravelActivity.this, AddEventActivity.class);
+                intent.putExtra("travel", travel);
+                startActivity(intent);
+            }
+        });
+
+        final ImageView returnHomePage = findViewById(R.id.homePage);
+        returnHomePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TravelActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -65,7 +82,7 @@ public class TravelActivity extends Activity {
                         TravelActivity.this,
                         "Delete",
                         30,
-                        R.drawable.ic_delete_white_24dp,
+                        R.mipmap.bin,
                         Color.parseColor("#FF3C30"),
                         new MyButtonClickListener() {
                             @Override

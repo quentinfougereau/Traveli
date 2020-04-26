@@ -4,16 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
+
+import android.widget.ImageView;
 
 import com.example.traveli.Adapter.TravelAdapter;
 import com.example.traveli.Helper.MyButtonClickListener;
 import com.example.traveli.Helper.MySwipeHelper;
 import com.example.traveli.Model.Travel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +35,12 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        final FloatingActionButton addTravel = findViewById(R.id.addTravel);
+        final ImageView addTravel = findViewById(R.id.addTravel);
         addTravel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Add Travel", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, AddTravelActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -50,12 +52,11 @@ public class MainActivity extends AppCompatActivity {
                         MainActivity.this,
                         "Delete",
                         30,
-                        R.drawable.ic_delete_white_24dp,
+                        R.mipmap.bin,
                         Color.parseColor("#FF3C30"),
                         new MyButtonClickListener() {
                             @Override
                             public void onClick(int pos) {
-                                //Toast.makeText(MainActivity.this, "Delete click", Toast.LENGTH_SHORT).show();
                                 removeTravel(pos);
                             }
                         }));
@@ -82,24 +83,17 @@ public class MainActivity extends AppCompatActivity {
         mySwipeHelper.getSwipeVelocityThreshold(1f);
 
         generateTravel();
-
     }
 
     private void generateTravel() {
         List<Travel> travelList = new ArrayList<>();
-        Travel japon = new Travel("Voyage au Japon", "Du 04/02/2020", "Au 16/05/2020");
-        Travel turquie = new Travel("Voyage en Turquie", "Du 06/07/2020", "Au 15/08/2020");
-        Travel australie = new Travel("Voyage en Australie", "Du 21/06/2020", "Au 10/12/2020");
+        Travel japon = new Travel(getResources().getString(R.string.japanTravelName), "Du 04/02/2020", "Au 16/05/2020");
+        Travel chine = new Travel(getResources().getString(R.string.chinaTravelName), "Du 06/07/2020", "Au 15/08/2020");
+        Travel usa = new Travel(getResources().getString(R.string.usaTravelName), "Du 21/06/2020", "Au 10/12/2020");
 
-        for (int i = 0; i < 20; i++) {
-            if (i % 3 == 0) {
-                travelList.add(japon);
-            } else if (i % 3 == 1) {
-                travelList.add(turquie);
-            } else {
-                travelList.add(australie);
-            }
-        }
+        travelList.add(japon);
+        travelList.add(chine);
+        travelList.add(usa);
 
         adapter = new TravelAdapter(this, travelList);
         recyclerView.setAdapter(adapter);
@@ -110,5 +104,4 @@ public class MainActivity extends AppCompatActivity {
         travelAdapter.removeTravel(pos);
         travelAdapter.notifyItemRemoved(pos);
     }
-
 }

@@ -12,11 +12,9 @@
         <activity android:name=".MapActivity"></activity>
         <activity android:name=".EditShowEventActivity" />
         <activity android:name=".NoteActivity" />
-        <activity
-            android:name=".TestActivity"
-            android:label="@string/title_activity_test"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".TravelActivity" />
+        <activity android:name=".AddTravelActivity" />
+        <activity android:name=".AddEventActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
