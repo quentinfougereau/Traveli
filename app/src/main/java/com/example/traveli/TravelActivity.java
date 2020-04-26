@@ -121,7 +121,7 @@ public class TravelActivity extends Activity {
         eventList.add(event1);
         eventList.add(event2);
 
-        adapter = new EventAdapter(this, eventList);
+        adapter = new EventAdapter(this, eventList, travel);
         recyclerView.setAdapter(adapter);
     }
 

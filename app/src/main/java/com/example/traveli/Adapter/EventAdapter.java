@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.traveli.Model.Event;
+import com.example.traveli.Model.Travel;
 import com.example.traveli.R;
 
 import java.util.List;
@@ -17,10 +18,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
 
     Context context;
     List<Event> eventList;
+    Travel travel;
 
-    public EventAdapter(Context context, List<Event> eventList) {
+    public EventAdapter(Context context, List<Event> eventList, Travel travel) {
         this.context = context;
         this.eventList = eventList;
+        this.travel = travel;
     }
 
     @NonNull
@@ -37,6 +40,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
         holder.eventStartDate.setText(eventList.get(position).getStartDate());
         holder.eventEndDate.setText(eventList.get(position).getEndDate());
         holder.event = eventList.get(position);
+        holder.travel = travel;
     }
 
     @Override

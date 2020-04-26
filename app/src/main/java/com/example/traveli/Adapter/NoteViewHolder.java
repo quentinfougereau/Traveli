@@ -24,11 +24,11 @@ public class NoteViewHolder extends RecyclerView.ViewHolder {
     public NoteViewHolder(@NonNull final View itemView) {
         super(itemView);
         noteName = (TextView) itemView.findViewById(R.id.noteName);
+
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ShowNoteActivity.class);
-                Log.d("Travel", "travel value: " + travel);
                 intent.putExtra("travel", travel);
                 intent.putExtra("note", note);
                 //final Intent intent = new Intent(v.getContext(), NoteActivity.class);

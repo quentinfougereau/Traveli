@@ -57,15 +57,15 @@ public class ShowNoteActivity extends AppCompatActivity {
         }
 
         if(note.getName().equals(note1)) {
-            nomNote.setText("Note1");
+            nomNote.setText(note1);
             noteText.setText("1) Des oeufs\n2) Du pâtes");
         }
         else if(note.getName().equals(note2)) {
-            nomNote.setText("Note2");
+            nomNote.setText(note2);
             noteText.setText("163 Avenue de Luminy - 13288 Marseille");
         }
         else if(note.getName().equals(note3)) {
-            nomNote.setText("Note3");
+            nomNote.setText(note3);
             noteText.setText("1) 15\n2) 17\n3) 18");
         }
 

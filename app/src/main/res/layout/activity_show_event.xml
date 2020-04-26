@@ -43,7 +43,7 @@
         android:id="@+id/duDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/selection_date_evenement"
+        android:hint="@string/selection_date_voyage"
         android:layout_alignTop="@+id/du"
         android:paddingLeft="30dp"
         android:layout_toRightOf="@id/du"
@@ -52,6 +52,28 @@
         android:drawableRight="@mipmap/calendrier"
         android:drawablePadding="20dp"/>
     <!-- android:onClick="showDatePickerDialog" -->
+
+    <TextView
+        android:id="@+id/heureDu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="335dp"
+        android:paddingRight="2dp"
+        android:hint="@string/heure"
+        android:textStyle="bold"
+        android:textColorHint="@color/colorDuAu"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/heureDuEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/heureFormat"
+        android:textSize="18dp"
+        android:layout_alignTop="@+id/heureDu"
+        android:paddingLeft="30dp"
+        android:layout_toRightOf="@id/heureDu"/>
 
     <!-- Au -->
     <TextView
@@ -73,7 +95,7 @@
         android:id="@+id/auDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/selection_date_evenement"
+        android:hint="@string/selection_date_voyage"
         android:layout_alignTop="@+id/au"
         android:paddingLeft="30dp"
         android:layout_toRightOf="@id/au"
@@ -82,6 +104,28 @@
         android:drawableRight="@mipmap/calendrier"
         android:drawablePadding="20dp"/>
     <!--        android:onClick="showDatePickerDialog"-->
+
+    <TextView
+        android:id="@+id/heureAu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="415dp"
+        android:paddingRight="2dp"
+        android:hint="@string/heure"
+        android:textStyle="bold"
+        android:textColorHint="@color/colorDuAu"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/heureAuEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/heureFormat"
+        android:textSize="18dp"
+        android:layout_alignTop="@+id/heureAu"
+        android:paddingLeft="30dp"
+        android:layout_toRightOf="@id/heureAu"/>
 
     <!-- Encoche verte -->
     <ImageView
@@ -117,7 +161,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="450dp"
+        android:layout_marginTop="470dp"
         android:hint="@string/note_evenement"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

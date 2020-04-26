@@ -10,7 +10,7 @@
     <string name="du">Du :</string>
     <string name="au">Au :</string>
     <string name="selection_date_voyage">jour/mois/année*</string>
-    <string name="selection_date_evenement">jour/mois/heure*</string>
+    <string name="selection_heure">heure*</string>
     <string name="japanTravelName">Le Japon</string>
     <string name="chinaTravelName">La Chine</string>
     <string name="usaTravelName">Les USA</string>
@@ -18,4 +18,6 @@
     <string name="note_evenement">Notes*</string>
     <string name="nom_de_la_note">Nom de la note*</string>
     <string name="note">Notes</string>
+    <string name="heure">Heure :</string>
+    <string name="heureFormat">heure:minute</string>
 </resources>

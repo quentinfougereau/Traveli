@@ -12,6 +12,7 @@ import com.example.traveli.MainActivity;
 import com.example.traveli.Model.Travel;
 import com.example.traveli.NoteActivity;
 import com.example.traveli.R;
+import com.example.traveli.ShowEventActivity;
 import com.example.traveli.TravelActivity;
 
 class TravelViewHolder extends RecyclerView.ViewHolder {

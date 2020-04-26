@@ -3,6 +3,8 @@ package com.example.traveli;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
+import android.widget.TimePicker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -28,6 +30,9 @@ public class AddEventActivity extends AppCompatActivity {
     private ImageView croix;
     private ImageView encocheGrise;
     private ImageView encocheVerte;
+
+    private TextView heureAuEdit;
+    private TextView heureDuEdit;
 
     private Travel travel;
 
@@ -62,6 +67,31 @@ public class AddEventActivity extends AppCompatActivity {
 
         selectionDateAu = (TextView) findViewById(R.id.auDate);
         selectionDateDu = (TextView) findViewById(R.id.duDate);
+
+        heureAuEdit = (TextView) findViewById(R.id.heureAuEdit);
+        heureDuEdit = (TextView) findViewById(R.id.heureDuEdit);
+
+        heureAuEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                int mHour = c.get(Calendar.HOUR_OF_DAY);
+                int mMinute = c.get(Calendar.MINUTE);
+
+                // Launch Time Picker Dialog
+                TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                        new TimePickerDialog.OnTimeSetListener() {
+
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay,
+                                                  int minute) {
+
+                                txtTime.setText(hourOfDay + ":" + minute);
+                            }
+                        }, mHour, mMinute, false);
+                timePickerDialog.show();
+            }
+        });
 
         // Affichage d'un toast pour quitter en cliquant sur la croix
         croix.setOnClickListener(new View.OnClickListener(){
@@ -99,6 +129,8 @@ public class AddEventActivity extends AppCompatActivity {
                 datePickerFragment.show(getSupportFragmentManager(), "datePicker");
             }
         });
+
+
     }
 
     public static class DatePickerFragment extends DialogFragment
@@ -107,18 +139,17 @@ public class AddEventActivity extends AppCompatActivity {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Calendar c = Calendar.getInstance();
-            int hour = c.get(Calendar.HOUR);
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
 
-            return new DatePickerDialog(getActivity(), this, month, day, hour);
+            return new DatePickerDialog(getActivity(), this, year, month, day);
         }
 
         @Override
-        public void onDateSet(DatePicker view, int month, int dayOfMonth, int hour) {
+        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
             month = month + 1;
-            String date = dayOfMonth + "/" + month + " - " + hour;
+            String date = dayOfMonth + "/" + month + "/" + year;
             if(estSelectionnerDateAu) {
                 selectionDateAu.setText(date);
             }
