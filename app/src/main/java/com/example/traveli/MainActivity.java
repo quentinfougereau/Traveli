@@ -87,13 +87,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void generateTravel() {
         List<Travel> travelList = new ArrayList<>();
-        Travel japon = new Travel(getResources().getString(R.string.japanTravelName), "Du 04/02/2020", "Au 16/05/2020");
-        Travel chine = new Travel(getResources().getString(R.string.chinaTravelName), "Du 06/07/2020", "Au 15/08/2020");
-        Travel usa = new Travel(getResources().getString(R.string.usaTravelName), "Du 21/06/2020", "Au 10/12/2020");
 
-        travelList.add(japon);
-        travelList.add(chine);
-        travelList.add(usa);
+        for (int i = 0; i < 3; i++) {
+            Travel japon = new Travel(getResources().getString(R.string.japanTravelName), "Du 04/0"+(2+i)+"/202"+i, "Au 16/0"+(2+i)+"/202"+i);
+            Travel chine = new Travel(getResources().getString(R.string.chinaTravelName), "Du 06/0"+(5+i)+"/202"+i, "Au 15/0"+(6+i)+"/202"+i);
+            Travel usa = new Travel(getResources().getString(R.string.usaTravelName), "Du 21/0"+(6+i)+"/202"+i, "Au 10/1"+(7+i)+"/202"+i);
+
+            travelList.add(japon);
+            travelList.add(chine);
+            travelList.add(usa);
+        }
 
         adapter = new TravelAdapter(this, travelList);
         recyclerView.setAdapter(adapter);
